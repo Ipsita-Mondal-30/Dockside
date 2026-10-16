@@ -1,0 +1,18 @@
+{
+  "name": "dockside-side-effect-recovery",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "tsx --test tests/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "evaluate": "tsx src/evaluation/run.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "dotenv": "^8.2.0",
+    "node-fetch": "^3.3.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
