@@ -5,10 +5,12 @@ This is the first executable slice of Dockside: a side-effect recovery harness f
 ## What is implemented
 
 - A typed action state model and conservative recovery policy.
-- A partner simulator with idempotency/lookup capability profiles and hidden ground truth.
-- Ten deterministic scenarios inspired by the research specification.
+- A typed action state model, guarded transitions, and a conservative recovery policy.
+- A partner simulator with explicit fault points, idempotency retention, and lookup profiles.
+- Ten deterministic scenarios. Policy-visible evidence is separate from scorer ground truth.
 - A naive retry baseline and a capability-aware policy for comparison.
-- Unit tests for core safety properties.
+- Unit tests for the recovery invariants.
+- `npm run evaluate` writes `evaluations/REPORT.md` from the simulated traces.
 
 ## What is not implemented yet
 
@@ -38,7 +40,9 @@ npm run evaluate
 
 - The naive retry baseline creates duplicate effects in the "partner accepted, response lost" scenario.
 - The capability-aware policy finds the existing booking when authoritative lookup is available and does not create a second effect.
-- When neither idempotency nor lookup exists, an ambiguous action remains unresolved/escalated rather than being blindly retried.
+- When neither a valid idempotency window nor lookup exists, an ambiguous action is escalated rather than retried.
+- An expired idempotency window is not treated as protection against duplicates.
+- A weak lookup miss and an ambiguous lookup do not authorize a retry.
 
 ## Design rule
 
